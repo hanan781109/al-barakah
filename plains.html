@@ -1,0 +1,393 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Al Barakah - Plans</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%,#14517a35,transparent 35%),
+        radial-gradient(circle at 85% 80%,#087d7430,transparent 35%),
+        #07111f;
+    color:#fff;
+}
+
+header{
+    background:#081522ee;
+    border-bottom:1px solid #ffffff12;
+    padding:14px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(12px);
+}
+
+.nav{
+    max-width:1050px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:19px;
+    font-weight:800;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    font-size:21px;
+}
+
+.back{
+    color:#9fb2c6;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:#20d6b4;
+}
+
+.container{
+    max-width:1050px;
+    margin:35px auto;
+    padding:0 16px 50px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.heading h1{
+    margin:0 0 8px;
+    font-size:30px;
+}
+
+.heading p{
+    margin:0;
+    color:#8fa4b9;
+    font-size:13px;
+}
+
+.plans{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.plan{
+    background:
+        linear-gradient(145deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:22px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 18px 45px #0007;
+    transition:.25s ease;
+}
+
+.plan:hover{
+    transform:translateY(-5px);
+    border-color:#20d6b435;
+}
+
+.plan-icon{
+    width:55px;
+    height:55px;
+    margin:0 auto 15px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#20d6b415;
+    color:#20d6b4;
+    font-size:24px;
+}
+
+.plan h2{
+    margin:0 0 10px;
+    font-size:18px;
+}
+
+.amount{
+    color:#20d6b4;
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.days{
+    color:#9fb2c6;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.purchase-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:11px;
+    background:
+        linear-gradient(135deg,#08a88e,#19d6b5);
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 8px 20px #00b89430;
+}
+
+.purchase-btn:hover{
+    filter:brightness(1.08);
+}
+
+.footer{
+    text-align:center;
+    color:#5f7488;
+    font-size:11px;
+    padding:10px 20px 30px;
+}
+
+@media(max-width:520px){
+
+    .container{
+        margin:25px auto;
+    }
+
+    .heading h1{
+        font-size:25px;
+    }
+
+    .plans{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🕌
+            </div>
+
+            AL BARAKAH
+
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="back">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="heading">
+
+        <h1>
+            Purchase Plans
+        </h1>
+
+        <p>
+            Select a plan to continue
+        </p>
+
+    </div>
+
+
+    <div class="plans">
+
+
+        <!-- 400 -->
+
+        <div class="plan">
+
+            <div class="plan-icon">
+                ◈
+            </div>
+
+            <h2>
+                Plan
+            </h2>
+
+            <div class="amount">
+                Rs. 400
+            </div>
+
+            <div class="days">
+                60 Days
+            </div>
+
+            <button
+                class="purchase-btn"
+                onclick="purchasePlan(400)">
+
+                Purchase
+
+            </button>
+
+        </div>
+
+
+        <!-- 700 -->
+
+        <div class="plan">
+
+            <div class="plan-icon">
+                ◈
+            </div>
+
+            <h2>
+                Plan
+            </h2>
+
+            <div class="amount">
+                Rs. 700
+            </div>
+
+            <div class="days">
+                60 Days
+            </div>
+
+            <button
+                class="purchase-btn"
+                onclick="purchasePlan(700)">
+
+                Purchase
+
+            </button>
+
+        </div>
+
+
+        <!-- 1500 -->
+
+        <div class="plan">
+
+            <div class="plan-icon">
+                ◈
+            </div>
+
+            <h2>
+                Plan
+            </h2>
+
+            <div class="amount">
+                Rs. 1,500
+            </div>
+
+            <div class="days">
+                60 Days
+            </div>
+
+            <button
+                class="purchase-btn"
+                onclick="purchasePlan(1500)">
+
+                Purchase
+
+            </button>
+
+        </div>
+
+
+        <!-- 3000 -->
+
+        <div class="plan">
+
+            <div class="plan-icon">
+                ◈
+            </div>
+
+            <h2>
+                Plan
+            </h2>
+
+            <div class="amount">
+                Rs. 3,000
+            </div>
+
+            <div class="days">
+                60 Days
+            </div>
+
+            <button
+                class="purchase-btn"
+                onclick="purchasePlan(3000)">
+
+                Purchase
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<div class="footer">
+
+    © 2026 Al Barakah
+
+</div>
+
+
+<script>
+
+function purchasePlan(amount){
+
+    window.location.href =
+        "deposit.html?amount=" + amount;
+
+}
+
+</script>
+
+
+</body>
+</html>
+```
