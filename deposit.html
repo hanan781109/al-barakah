@@ -1,0 +1,741 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Al Barakah - Deposit</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%,#14517a35,transparent 35%),
+        radial-gradient(circle at 85% 80%,#087d7430,transparent 35%),
+        #07111f;
+    color:#fff;
+}
+
+/* HEADER */
+
+header{
+    background:#081522ee;
+    border-bottom:1px solid #ffffff12;
+    padding:14px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(12px);
+}
+
+.nav{
+    max-width:1050px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:19px;
+    font-weight:800;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    font-size:21px;
+}
+
+.back{
+    color:#9fb2c6;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:#20d6b4;
+}
+
+/* MAIN */
+
+.container{
+    max-width:620px;
+    margin:35px auto;
+    padding:0 16px 50px;
+}
+
+/* CARD */
+
+.card{
+    background:linear-gradient(145deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 20px 55px #0008;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.title h1{
+    margin:0 0 8px;
+    font-size:28px;
+}
+
+.title p{
+    margin:0;
+    color:#8fa4b9;
+    font-size:13px;
+}
+
+/* PAYMENT BOX */
+
+.payment{
+    background:linear-gradient(135deg,#0b473f,#0c2638);
+    border:1px solid #20d6b425;
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:25px;
+}
+
+.payment-title{
+    color:#9fb2c6;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.method{
+    font-size:22px;
+    font-weight:800;
+    color:#20d6b4;
+    margin-bottom:18px;
+}
+
+.account-label{
+    color:#8fa4b9;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.account-number{
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.copy-btn{
+    margin-top:14px;
+    padding:10px 15px;
+    border:1px solid #20d6b440;
+    border-radius:9px;
+    background:#ffffff08;
+    color:#20d6b4;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.copy-btn:hover{
+    background:#20d6b415;
+}
+
+/* FORM */
+
+.field{
+    margin-bottom:17px;
+}
+
+label{
+    display:block;
+    color:#c7d6e4;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+input,
+select{
+    width:100%;
+    padding:13px 14px;
+    border-radius:11px;
+    border:1px solid #ffffff15;
+    outline:none;
+    background:#071522;
+    color:#fff;
+    font-size:14px;
+}
+
+input::placeholder{
+    color:#61758a;
+}
+
+input:focus,
+select:focus{
+    border-color:#20d6b4;
+    box-shadow:0 0 0 3px #20d6b415;
+}
+
+select option{
+    background:#071522;
+}
+
+/* BUTTON */
+
+.submit-btn{
+    width:100%;
+    border:0;
+    border-radius:12px;
+    padding:14px;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    color:#fff;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 8px 22px #00b89435;
+}
+
+.submit-btn:hover{
+    filter:brightness(1.08);
+}
+
+.submit-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+/* MESSAGE */
+
+#message{
+    min-height:20px;
+    text-align:center;
+    margin-top:15px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* INFO */
+
+.info{
+    margin-top:20px;
+    padding:14px;
+    border-radius:12px;
+    background:#ffffff06;
+    border:1px solid #ffffff0c;
+    color:#8297aa;
+    font-size:12px;
+    line-height:1.6;
+}
+
+/* MOBILE */
+
+@media(max-width:520px){
+
+    .container{
+        margin:20px auto;
+    }
+
+    .card{
+        padding:20px 16px;
+        border-radius:20px;
+    }
+
+    .title h1{
+        font-size:24px;
+    }
+
+    .account-number{
+        font-size:21px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🕌
+            </div>
+
+            AL BARAKAH
+
+        </div>
+
+        <a href="dashboard.html" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<div class="card">
+
+    <div class="title">
+
+        <h1>
+            Deposit
+        </h1>
+
+        <p>
+            Submit your payment details
+        </p>
+
+    </div>
+
+
+    <!-- EASYPaisa PAYMENT DETAILS -->
+
+    <div class="payment">
+
+        <div class="payment-title">
+            PAYMENT METHOD
+        </div>
+
+        <div class="method">
+            Easypaisa
+        </div>
+
+        <div class="account-label">
+            Easypaisa Account Number
+        </div>
+
+        <div class="account-number"
+             id="accountNumber">
+            03263210958
+        </div>
+
+        <button
+            type="button"
+            class="copy-btn"
+            onclick="copyNumber()">
+            Copy Number
+        </button>
+
+    </div>
+
+
+    <!-- DEPOSIT FORM -->
+
+    <form id="depositForm">
+
+        <div class="field">
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="amount">
+                Deposit Amount
+            </label>
+
+            <select id="amount" required>
+
+                <option value="">
+                    Select amount
+                </option>
+
+                <option value="400">
+                    Rs. 400
+                </option>
+
+                <option value="700">
+                    Rs. 700
+                </option>
+
+                <option value="1500">
+                    Rs. 1,500
+                </option>
+
+                <option value="3000">
+                    Rs. 3,000
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="senderNumber">
+                Sender Easypaisa Number
+            </label>
+
+            <input
+                type="tel"
+                id="senderNumber"
+                placeholder="03XXXXXXXXX"
+                maxlength="11"
+                required>
+
+        </div>
+
+
+        <div class="field">
+
+            <label for="transactionId">
+                Transaction ID / TRX ID
+            </label>
+
+            <input
+                type="text"
+                id="transactionId"
+                placeholder="Enter transaction ID"
+                required>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="submit-btn"
+            id="submitBtn">
+
+            Submit Deposit Request
+
+        </button>
+
+
+        <div id="message"></div>
+
+    </form>
+
+
+    <div class="info">
+        Enter the correct payment details and transaction ID.
+        Your deposit request will be sent for verification.
+    </div>
+
+</div>
+
+</main>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    push,
+    set
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "YOUR_FIREBASE_API_KEY",
+
+    authDomain:
+    "YOUR_PROJECT.firebaseapp.com",
+
+    databaseURL:
+    "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+
+    projectId:
+    "YOUR_PROJECT",
+
+    storageBucket:
+    "YOUR_PROJECT.firebasestorage.app",
+
+    messagingSenderId:
+    "YOUR_SENDER_ID",
+
+    appId:
+    "YOUR_APP_ID"
+
+};
+
+
+/* =========================
+   FIREBASE INITIALIZE
+========================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+
+let currentUser = null;
+
+
+/* =========================
+   CHECK LOGIN
+========================= */
+
+onAuthStateChanged(auth,(user)=>{
+
+    if(!user){
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+    currentUser = user;
+
+});
+
+
+/* =========================
+   SUBMIT DEPOSIT
+========================= */
+
+document
+.getElementById("depositForm")
+.addEventListener("submit",async(event)=>{
+
+    event.preventDefault();
+
+
+    const message =
+        document.getElementById("message");
+
+    const button =
+        document.getElementById("submitBtn");
+
+
+    if(!currentUser){
+
+        message.style.color="#ff6b6b";
+
+        message.innerText =
+            "Please login first.";
+
+        return;
+
+    }
+
+
+    const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+    const amount =
+        document
+        .getElementById("amount")
+        .value;
+
+
+    const senderNumber =
+        document
+        .getElementById("senderNumber")
+        .value
+        .trim();
+
+
+    const transactionId =
+        document
+        .getElementById("transactionId")
+        .value
+        .trim();
+
+
+    if(
+        !name ||
+        !amount ||
+        !senderNumber ||
+        !transactionId
+    ){
+
+        message.style.color="#ff6b6b";
+
+        message.innerText =
+            "Please fill all fields.";
+
+        return;
+
+    }
+
+
+    try{
+
+        button.disabled = true;
+
+        button.innerText =
+            "Submitting...";
+
+
+        const depositRef =
+            push(ref(db,"deposits"));
+
+
+        await set(depositRef,{
+
+            uid:
+                currentUser.uid,
+
+            name:
+                name,
+
+            email:
+                currentUser.email || "",
+
+            amount:
+                Number(amount),
+
+            method:
+                "Easypaisa",
+
+            accountNumber:
+                "03263210958",
+
+            senderNumber:
+                senderNumber,
+
+            transactionId:
+                transactionId,
+
+            status:
+                "pending",
+
+            createdAt:
+                Date.now()
+
+        });
+
+
+        message.style.color =
+            "#20d6b4";
+
+        message.innerText =
+            "Deposit request submitted successfully.";
+
+
+        document
+        .getElementById("depositForm")
+        .reset();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        message.style.color =
+            "#ff6b6b";
+
+        message.innerText =
+            "Request could not be submitted. Please try again.";
+
+    }finally{
+
+        button.disabled = false;
+
+        button.innerText =
+            "Submit Deposit Request";
+
+    }
+
+});
+
+
+/* =========================
+   COPY EASYPaisa NUMBER
+========================= */
+
+window.copyNumber =
+function(){
+
+    const number =
+        document
+        .getElementById("accountNumber")
+        .innerText;
+
+
+    navigator.clipboard
+    .writeText(number)
+    .then(()=>{
+
+        const button =
+            document
+            .querySelector(".copy-btn");
+
+
+        button.innerText =
+            "Copied ✓";
+
+
+        setTimeout(()=>{
+
+            button.innerText =
+                "Copy Number";
+
+        },1500);
+
+    });
+
+};
+
+</script>
+
+
+</body>
+</html>
+```
