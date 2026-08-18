@@ -1,0 +1,838 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Al Barakah</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:#ffffff;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#081522ee;
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #ffffff12;
+}
+
+.nav{
+    max-width:1150px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:21px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    font-size:21px;
+    box-shadow:0 5px 18px #00b89440;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-links a{
+    color:#c4d3e1;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:#20d6b4;
+}
+
+.nav-btn{
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    color:white !important;
+    padding:10px 17px;
+    border-radius:10px;
+}
+
+/* HERO */
+
+.hero{
+    min-height:650px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 80% 25%,#087d7430,transparent 35%),
+        radial-gradient(circle at 15% 70%,#14517a35,transparent 35%),
+        #07111f;
+}
+
+.hero-container{
+    width:100%;
+    max-width:1150px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+.hero-content{
+    max-width:700px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:30px;
+    background:#10b99b18;
+    border:1px solid #20d6b430;
+    color:#5ce5cf;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    margin:0;
+    font-size:58px;
+    line-height:1.08;
+    letter-spacing:-2px;
+}
+
+.hero h1 span{
+    color:#20d6b4;
+}
+
+.hero p{
+    max-width:620px;
+    color:#9fb2c6;
+    font-size:17px;
+    line-height:1.7;
+    margin:22px 0 30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 22px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:15px;
+}
+
+.btn-primary{
+    color:white;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    box-shadow:0 8px 22px #00b89435;
+}
+
+.btn-secondary{
+    color:#d9e7f3;
+    background:#ffffff08;
+    border:1px solid #ffffff18;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* HERO CARD */
+
+.hero-card{
+    position:absolute;
+    right:8%;
+    top:50%;
+    transform:translateY(-50%);
+    width:300px;
+    padding:25px;
+    border-radius:25px;
+    background:linear-gradient(145deg,#102b43,#0b1929);
+    border:1px solid #ffffff15;
+    box-shadow:0 20px 60px #0008;
+}
+
+.hero-card-title{
+    color:#9fb2c6;
+    font-size:13px;
+}
+
+.hero-card-value{
+    font-size:34px;
+    font-weight:800;
+    margin:10px 0 20px;
+}
+
+.hero-card-line{
+    height:1px;
+    background:#ffffff12;
+    margin:15px 0;
+}
+
+.hero-small{
+    display:flex;
+    justify-content:space-between;
+    color:#9fb2c6;
+    font-size:13px;
+}
+
+.hero-small strong{
+    color:#20d6b4;
+}
+
+/* SECTION */
+
+.section{
+    max-width:1150px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+.section-heading{
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 45px;
+}
+
+.section-heading h2{
+    font-size:34px;
+    margin:0 0 12px;
+}
+
+.section-heading p{
+    color:#8fa4b9;
+    line-height:1.6;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:#0d1c2d;
+    border:1px solid #ffffff10;
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 8px 25px #0004;
+    transition:.25s;
+}
+
+.feature:hover{
+    transform:translateY(-5px);
+    border-color:#20d6b440;
+}
+
+.icon{
+    width:52px;
+    height:52px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#10b99b18;
+    font-size:25px;
+    margin-bottom:18px;
+}
+
+.feature h3{
+    margin:0 0 10px;
+}
+
+.feature p{
+    color:#8fa4b9;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* PACKAGES */
+
+.packages{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.package{
+    background:linear-gradient(180deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:20px;
+    padding:25px 18px;
+    text-align:center;
+    transition:.25s;
+}
+
+.package:hover{
+    transform:translateY(-6px);
+    border-color:#20d6b450;
+}
+
+.package h3{
+    margin:0 0 18px;
+}
+
+.price{
+    color:#20d6b4;
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.package p{
+    color:#8fa4b9;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.package-btn{
+    width:100%;
+    border:0;
+    padding:12px;
+    border-radius:11px;
+    color:white;
+    font-weight:700;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    cursor:pointer;
+}
+
+/* CTA */
+
+.cta{
+    max-width:1100px;
+    margin:0 auto 80px;
+    padding:55px 25px;
+    text-align:center;
+    border-radius:25px;
+    background:
+        radial-gradient(circle at 50% 0%,#20d6b425,transparent 45%),
+        linear-gradient(135deg,#0e304b,#0a2537);
+    border:1px solid #ffffff12;
+}
+
+.cta h2{
+    font-size:32px;
+    margin:0 0 12px;
+}
+
+.cta p{
+    color:#9fb2c6;
+    margin-bottom:25px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#050d16;
+    border-top:1px solid #ffffff0d;
+    padding:35px 20px;
+    text-align:center;
+    color:#71869b;
+    font-size:13px;
+}
+
+.footer-logo{
+    color:white;
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    .hero-card{
+        display:none;
+    }
+
+    .hero-content{
+        max-width:800px;
+    }
+
+    .packages{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .nav-links a:not(.nav-btn){
+        display:none;
+    }
+
+    .hero{
+        min-height:580px;
+    }
+
+    .hero-container{
+        padding:70px 18px;
+    }
+
+    .hero h1{
+        font-size:42px;
+        letter-spacing:-1px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:60px 18px;
+    }
+
+}
+
+@media(max-width:520px){
+
+    .logo{
+        font-size:17px;
+    }
+
+    .logo-icon{
+        width:38px;
+        height:38px;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .packages{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .package{
+        padding:20px 10px;
+    }
+
+    .price{
+        font-size:24px;
+    }
+
+    .section-heading h2{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🕌
+            </div>
+
+            AL BARAKAH
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#packages">
+                Packages
+            </a>
+
+            <a href="login.html" class="nav-btn">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                WELCOME TO AL BARAKAH
+            </div>
+
+            <h1>
+                Simple.
+                <span>Modern.</span>
+                Secure.
+            </h1>
+
+            <p>
+                Manage your account, explore available packages
+                and keep track of your activity from one simple
+                and modern platform.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="register.html"
+                   class="btn btn-primary">
+                    Create Account
+                </a>
+
+                <a href="#packages"
+                   class="btn btn-secondary">
+                    View Packages
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="hero-card-title">
+                ACCOUNT OVERVIEW
+            </div>
+
+            <div class="hero-card-value">
+                Rs. 0
+            </div>
+
+            <div class="hero-card-line"></div>
+
+            <div class="hero-small">
+                <span>Status</span>
+                <strong>Active</strong>
+            </div>
+
+            <div class="hero-card-line"></div>
+
+            <div class="hero-small">
+                <span>Platform</span>
+                <strong>Al Barakah</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+    <div class="section-heading">
+
+        <h2>
+            Everything in one place
+        </h2>
+
+        <p>
+            A clean dashboard experience designed to make
+            account management simple and easy.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="icon">
+                👤
+            </div>
+
+            <h3>
+                Personal Account
+            </h3>
+
+            <p>
+                Manage your account information and keep
+                your activity organized.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                🛒
+            </div>
+
+            <h3>
+                Packages
+            </h3>
+
+            <p>
+                Browse available packages and select the
+                option that suits you.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                📊
+            </div>
+
+            <h3>
+                Activity Tracking
+            </h3>
+
+            <p>
+                Keep track of your orders, transactions
+                and account activity.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- PACKAGES -->
+
+<section class="section" id="packages">
+
+    <div class="section-heading">
+
+        <h2>
+            Available Packages
+        </h2>
+
+        <p>
+            Select a package to continue.
+        </p>
+
+    </div>
+
+
+    <div class="packages">
+
+
+        <div class="package">
+
+            <h3>
+                Package 1
+            </h3>
+
+            <div class="price">
+                Rs. 400
+            </div>
+
+            <p>
+                Purchase Package
+            </p>
+
+            <button
+                class="package-btn"
+                onclick="selectPackage(400)">
+                Purchase
+            </button>
+
+        </div>
+
+
+        <div class="package">
+
+            <h3>
+                Package 2
+            </h3>
+
+            <div class="price">
+                Rs. 700
+            </div>
+
+            <p>
+                Purchase Package
+            </p>
+
+            <button
+                class="package-btn"
+                onclick="selectPackage(700)">
+                Purchase
+            </button>
+
+        </div>
+
+
+        <div class="package">
+
+            <h3>
+                Package 3
+            </h3>
+
+            <div class="price">
+                Rs. 1,500
+            </div>
+
+            <p>
+                Purchase Package
+            </p>
+
+            <button
+                class="package-btn"
+                onclick="selectPackage(1500)">
+                Purchase
+            </button>
+
+        </div>
+
+
+        <div class="package">
+
+            <h3>
+                Package 4
+            </h3>
+
+            <div class="price">
+                Rs. 3,000
+            </div>
+
+            <p>
+                Purchase Package
+            </p>
+
+            <button
+                class="package-btn"
+                onclick="selectPackage(3000)">
+                Purchase
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>
+        Ready to get started?
+    </h2>
+
+    <p>
+        Create your account and explore Al Barakah.
+    </p>
+
+    <a href="register.html"
+       class="btn btn-primary">
+        Get Started
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-logo">
+        AL BARAKAH
+    </div>
+
+    <div>
+        © 2026 Al Barakah. All rights reserved.
+    </div>
+
+</footer>
+
+
+<script>
+
+function selectPackage(amount){
+
+    alert(
+        "Selected package: Rs. " +
+        amount.toLocaleString()
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
+```
