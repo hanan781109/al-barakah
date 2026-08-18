@@ -1,0 +1,1065 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Al Barakah - Admin Panel</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%,#14517a35,transparent 35%),
+        radial-gradient(circle at 85% 80%,#087d7430,transparent 35%),
+        #07111f;
+    color:#fff;
+}
+
+header{
+    background:#081522ee;
+    border-bottom:1px solid #ffffff12;
+    padding:16px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(12px);
+}
+
+.nav{
+    max-width:1150px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:19px;
+    font-weight:800;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    font-size:21px;
+}
+
+.logout{
+    border:1px solid #ff646425;
+    background:#ff646410;
+    color:#ff7777;
+    padding:10px 16px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.logout:hover{
+    background:#ff646420;
+}
+
+.container{
+    max-width:1150px;
+    margin:30px auto;
+    padding:0 16px 50px;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading h1{
+    margin:0 0 7px;
+    font-size:28px;
+}
+
+.heading p{
+    margin:0;
+    color:#8fa4b9;
+    font-size:13px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(210px,1fr));
+    gap:16px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:linear-gradient(145deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 12px 35px #0006;
+}
+
+.stat-label{
+    color:#8fa4b9;
+    font-size:12px;
+}
+
+.stat-number{
+    color:#20d6b4;
+    font-size:30px;
+    font-weight:800;
+    margin-top:8px;
+}
+
+.card{
+    background:linear-gradient(145deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 15px 40px #0006;
+}
+
+.card h2{
+    margin:0 0 18px;
+    font-size:20px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:750px;
+}
+
+th{
+    text-align:left;
+    color:#8fa4b9;
+    font-size:12px;
+    font-weight:600;
+    padding:13px 10px;
+    border-bottom:1px solid #ffffff12;
+}
+
+td{
+    padding:14px 10px;
+    border-bottom:1px solid #ffffff0c;
+    font-size:13px;
+    color:#d5e0ea;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.pending{
+    background:#f59e0b18;
+    color:#fbbf24;
+}
+
+.approved{
+    background:#20d6b418;
+    color:#20d6b4;
+}
+
+.rejected{
+    background:#ef444418;
+    color:#ff6b6b;
+}
+
+.action{
+    display:flex;
+    gap:7px;
+}
+
+.approve{
+    border:0;
+    border-radius:8px;
+    padding:8px 11px;
+    background:#08a88e;
+    color:#fff;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+}
+
+.reject{
+    border:0;
+    border-radius:8px;
+    padding:8px 11px;
+    background:#dc4545;
+    color:#fff;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+}
+
+.approve:hover,
+.reject:hover{
+    filter:brightness(1.1);
+}
+
+.empty{
+    text-align:center;
+    color:#71869a;
+    padding:25px;
+}
+
+.message{
+    text-align:center;
+    min-height:20px;
+    margin-bottom:15px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.footer{
+    text-align:center;
+    color:#5f7488;
+    font-size:11px;
+    padding:10px 20px 30px;
+}
+
+@media(max-width:600px){
+
+    .container{
+        margin:20px auto;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .heading h1{
+        font-size:24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🕌
+            </div>
+
+            AL BARAKAH ADMIN
+
+        </div>
+
+        <button
+            class="logout"
+            id="logoutBtn">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="heading">
+
+    <h1>
+        Admin Panel
+    </h1>
+
+    <p>
+        Manage deposits and withdrawal requests
+    </p>
+
+</div>
+
+
+<div
+    id="message"
+    class="message">
+</div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+
+        <div class="stat-label">
+            PENDING DEPOSITS
+        </div>
+
+        <div
+            class="stat-number"
+            id="depositCount">
+
+            0
+
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-label">
+            PENDING WITHDRAWALS
+        </div>
+
+        <div
+            class="stat-number"
+            id="withdrawalCount">
+
+            0
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DEPOSITS -->
+
+<div class="card">
+
+    <h2>
+        Pending Deposits
+    </h2>
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Sender</th>
+                    <th>TRX ID</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="depositsTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- WITHDRAWALS -->
+
+<div class="card">
+
+    <h2>
+        Pending Withdrawals
+    </h2>
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Account</th>
+                    <th>Holder</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="withdrawalsTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</main>
+
+
+<div class="footer">
+
+    © 2026 Al Barakah
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    update
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "YOUR_FIREBASE_API_KEY",
+
+    authDomain:
+    "YOUR_PROJECT.firebaseapp.com",
+
+    databaseURL:
+    "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+
+    projectId:
+    "YOUR_PROJECT",
+
+    storageBucket:
+    "YOUR_PROJECT.firebasestorage.app",
+
+    messagingSenderId:
+    "YOUR_SENDER_ID",
+
+    appId:
+    "YOUR_APP_ID"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+
+/* =========================
+   ADMIN EMAIL
+========================= */
+
+const ADMIN_EMAIL =
+    "hanandanger7810@gmail.com";
+
+
+/* =========================
+   AUTH CHECK
+========================= */
+
+onAuthStateChanged(
+    auth,
+    async(user)=>{
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        if(
+            user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            alert("Not Admin");
+
+            window.location.href =
+                "dashboard.html";
+
+            return;
+
+        }
+
+
+        await loadDeposits();
+
+        await loadWithdrawals();
+
+    }
+);
+
+
+/* =========================
+   LOAD DEPOSITS
+========================= */
+
+async function loadDeposits(){
+
+    const table =
+        document.getElementById(
+            "depositsTable"
+        );
+
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(db,"deposits")
+            );
+
+
+        const data =
+            snapshot.val() || {};
+
+
+        table.innerHTML = "";
+
+
+        let pendingCount = 0;
+
+
+        for(
+            const id in data
+        ){
+
+            const d =
+                data[id];
+
+
+            if(
+                d.status !== "pending"
+            ){
+
+                continue;
+
+            }
+
+
+            pendingCount++;
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>${safe(d.name)}</td>
+
+                <td>${safe(d.email)}</td>
+
+                <td>Rs. ${Number(d.amount || 0)}</td>
+
+                <td>${safe(d.method)}</td>
+
+                <td>${safe(d.senderNumber)}</td>
+
+                <td>${safe(d.transactionId)}</td>
+
+                <td>
+                    <span class="status pending">
+                        Pending
+                    </span>
+                </td>
+
+                <td>
+
+                    <div class="action">
+
+                        <button
+                            class="approve"
+                            data-id="${id}"
+                            data-action="approve-deposit">
+
+                            Approve
+
+                        </button>
+
+                        <button
+                            class="reject"
+                            data-id="${id}"
+                            data-action="reject-deposit">
+
+                            Reject
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+
+
+        document
+        .getElementById(
+            "depositCount"
+        )
+        .innerText =
+            pendingCount;
+
+
+        if(pendingCount === 0){
+
+            table.innerHTML = `
+
+                <tr>
+                    <td
+                        colspan="8"
+                        class="empty">
+
+                        No pending deposits.
+
+                    </td>
+                </tr>
+
+            `;
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Could not load deposits.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   LOAD WITHDRAWALS
+========================= */
+
+async function loadWithdrawals(){
+
+    const table =
+        document.getElementById(
+            "withdrawalsTable"
+        );
+
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(db,"withdrawals")
+            );
+
+
+        const data =
+            snapshot.val() || {};
+
+
+        table.innerHTML = "";
+
+
+        let pendingCount = 0;
+
+
+        for(
+            const id in data
+        ){
+
+            const w =
+                data[id];
+
+
+            if(
+                w.status !== "pending"
+            ){
+
+                continue;
+
+            }
+
+
+            pendingCount++;
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>${safe(w.name)}</td>
+
+                <td>${safe(w.email)}</td>
+
+                <td>Rs. ${Number(w.amount || 0)}</td>
+
+                <td>${safe(w.method)}</td>
+
+                <td>${safe(w.accountNumber)}</td>
+
+                <td>${safe(w.accountName)}</td>
+
+                <td>
+                    <span class="status pending">
+                        Pending
+                    </span>
+                </td>
+
+                <td>
+
+                    <div class="action">
+
+                        <button
+                            class="approve"
+                            data-id="${id}"
+                            data-action="approve-withdraw">
+
+                            Approve
+
+                        </button>
+
+                        <button
+                            class="reject"
+                            data-id="${id}"
+                            data-action="reject-withdraw">
+
+                            Reject
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+
+
+        document
+        .getElementById(
+            "withdrawalCount"
+        )
+        .innerText =
+            pendingCount;
+
+
+        if(pendingCount === 0){
+
+            table.innerHTML = `
+
+                <tr>
+                    <td
+                        colspan="8"
+                        class="empty">
+
+                        No pending withdrawals.
+
+                    </td>
+                </tr>
+
+            `;
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Could not load withdrawals.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   BUTTON ACTIONS
+========================= */
+
+document.addEventListener(
+    "click",
+    async(event)=>{
+
+        const button =
+            event.target.closest(
+                "button[data-action]"
+            );
+
+
+        if(!button){
+
+            return;
+
+        }
+
+
+        const id =
+            button.dataset.id;
+
+
+        const action =
+            button.dataset.action;
+
+
+        button.disabled = true;
+
+
+        try{
+
+            if(
+                action ===
+                "approve-deposit"
+            ){
+
+                await update(
+                    ref(
+                        db,
+                        "deposits/" + id
+                    ),
+                    {
+                        status:
+                            "approved",
+                        reviewedAt:
+                            Date.now()
+                    }
+                );
+
+            }
+
+
+            if(
+                action ===
+                "reject-deposit"
+            ){
+
+                await update(
+                    ref(
+                        db,
+                        "deposits/" + id
+                    ),
+                    {
+                        status:
+                            "rejected",
+                        reviewedAt:
+                            Date.now()
+                    }
+                );
+
+            }
+
+
+            if(
+                action ===
+                "approve-withdraw"
+            ){
+
+                await update(
+                    ref(
+                        db,
+                        "withdrawals/" + id
+                    ),
+                    {
+                        status:
+                            "approved",
+                        reviewedAt:
+                            Date.now()
+                    }
+                );
+
+            }
+
+
+            if(
+                action ===
+                "reject-withdraw"
+            ){
+
+                await update(
+                    ref(
+                        db,
+                        "withdrawals/" + id
+                    ),
+                    {
+                        status:
+                            "rejected",
+                        reviewedAt:
+                            Date.now()
+                    }
+                );
+
+            }
+
+
+            await loadDeposits();
+
+            await loadWithdrawals();
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showMessage(
+                "Action failed. Check Firebase Rules.",
+                "error"
+            );
+
+            button.disabled = false;
+
+        }
+
+    }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+    "click",
+    async()=>{
+
+        await signOut(auth);
+
+        window.location.href =
+            "login.html";
+
+    }
+);
+
+
+/* =========================
+   SAFE HTML
+========================= */
+
+function safe(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.innerText =
+        text;
+
+
+    message.style.color =
+        type === "error"
+        ? "#ff6b6b"
+        : "#20d6b4";
+
+
+    setTimeout(()=>{
+
+        message.innerText = "";
+
+    },3000);
+
+}
+
+</script>
+
+
+</body>
+</html>
+```
