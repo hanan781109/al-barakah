@@ -1,0 +1,517 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Al Barakah - Login</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%,#14517a35,transparent 35%),
+        radial-gradient(circle at 85% 80%,#087d7430,transparent 35%),
+        #07111f;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px 15px;
+}
+
+/* MAIN */
+
+.wrapper{
+    width:100%;
+    max-width:440px;
+}
+
+/* LOGO */
+
+.logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo-icon{
+    width:62px;
+    height:62px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    font-size:30px;
+    box-shadow:0 8px 25px #00b89445;
+}
+
+.logo h1{
+    margin:0;
+    font-size:25px;
+    letter-spacing:.5px;
+}
+
+.logo p{
+    margin:7px 0 0;
+    color:#8fa4b9;
+    font-size:13px;
+}
+
+/* CARD */
+
+.card{
+    background:linear-gradient(145deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:24px;
+    padding:30px 25px;
+    box-shadow:0 20px 55px #0008;
+}
+
+.card h2{
+    margin:0 0 7px;
+    text-align:center;
+    font-size:25px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#8fa4b9;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+/* INPUT */
+
+.field{
+    margin-bottom:17px;
+}
+
+label{
+    display:block;
+    color:#c7d6e4;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+input{
+    width:100%;
+    padding:13px 14px;
+    border-radius:11px;
+    border:1px solid #ffffff15;
+    outline:none;
+    background:#071522;
+    color:#fff;
+    font-size:14px;
+}
+
+input::placeholder{
+    color:#61758a;
+}
+
+input:focus{
+    border-color:#20d6b4;
+    box-shadow:0 0 0 3px #20d6b415;
+}
+
+/* PASSWORD */
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    padding-right:55px;
+}
+
+.show-password{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:0;
+    color:#7f95aa;
+    cursor:pointer;
+    font-size:12px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:5px 0 20px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#8fa4b9;
+    font-size:12px;
+}
+
+.remember input{
+    width:auto;
+    accent-color:#19d6b5;
+}
+
+.forgot{
+    color:#20d6b4;
+    text-decoration:none;
+    font-size:12px;
+}
+
+.forgot:hover{
+    text-decoration:underline;
+}
+
+/* BUTTON */
+
+.login-btn{
+    width:100%;
+    border:0;
+    border-radius:12px;
+    padding:14px;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    color:#fff;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 8px 22px #00b89435;
+}
+
+.login-btn:hover{
+    filter:brightness(1.08);
+}
+
+/* MESSAGE */
+
+#message{
+    text-align:center;
+    margin-top:15px;
+    min-height:18px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* REGISTER */
+
+.register{
+    text-align:center;
+    margin-top:20px;
+    color:#8fa4b9;
+    font-size:13px;
+}
+
+.register a{
+    color:#20d6b4;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.register a:hover{
+    text-decoration:underline;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    color:#5f7488;
+    font-size:11px;
+    margin-top:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    body{
+        padding:18px 12px;
+    }
+
+    .card{
+        padding:25px 18px;
+        border-radius:20px;
+    }
+
+    .logo h1{
+        font-size:23px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="wrapper">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🕌
+        </div>
+
+        <h1>
+            AL BARAKAH
+        </h1>
+
+        <p>
+            Welcome back
+        </p>
+
+    </div>
+
+
+    <!-- LOGIN CARD -->
+
+    <div class="card">
+
+        <h2>
+            Login
+        </h2>
+
+        <div class="subtitle">
+            Sign in to your account
+        </div>
+
+
+        <form id="loginForm">
+
+
+            <div class="field">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()">
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember">
+
+                    Remember me
+
+                </label>
+
+
+                <a href="#"
+                   class="forgot"
+                   onclick="forgotPassword(event)">
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn">
+
+                Login
+
+            </button>
+
+
+            <div id="message"></div>
+
+
+        </form>
+
+
+        <div class="register">
+
+            Don't have an account?
+
+            <a href="register.html">
+                Create Account
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 Al Barakah
+    </div>
+
+
+</div>
+
+
+<script type="module">
+
+/*
+   Firebase Authentication will be connected
+   after the Firebase project configuration
+   is added.
+*/
+
+const form =
+    document.getElementById("loginForm");
+
+const message =
+    document.getElementById("message");
+
+
+form.addEventListener("submit",(e)=>{
+
+    e.preventDefault();
+
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+
+    if(!email || !password){
+
+        message.style.color="#ff6b6b";
+
+        message.innerText =
+            "Please enter your email and password.";
+
+        return;
+
+    }
+
+
+    /*
+       Firebase login will be connected
+       in the next step.
+    */
+
+    message.style.color="#20d6b4";
+
+    message.innerText =
+        "Login details are ready.";
+
+});
+
+
+window.togglePassword =
+function(){
+
+    const input =
+        document.getElementById("password");
+
+    const button =
+        document.querySelector(".show-password");
+
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+        button.innerText = "Hide";
+
+    }else{
+
+        input.type = "password";
+
+        button.innerText = "Show";
+
+    }
+
+};
+
+
+window.forgotPassword =
+function(event){
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+
+    if(!email){
+
+        message.style.color="#ffcc66";
+
+        message.innerText =
+            "Enter your email first.";
+
+        return;
+
+    }
+
+
+    message.style.color="#20d6b4";
+
+    message.innerText =
+        "Password reset will be available after Firebase is connected.";
+
+};
+
+</script>
+
+
+</body>
+</html>
+```
