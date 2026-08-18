@@ -68,6 +68,10 @@ header{
     cursor:pointer;
 }
 
+.logout:hover{
+    background:#ffffff12;
+}
+
 /* CONTAINER */
 
 .container{
@@ -97,6 +101,15 @@ header{
 .welcome p{
     margin:0;
     color:#9fb2c6;
+}
+
+/* USER EMAIL */
+
+.user-email{
+    margin-top:9px;
+    color:#20d6b4;
+    font-size:13px;
+    word-break:break-all;
 }
 
 /* STATS */
@@ -133,11 +146,69 @@ header{
     color:#20d6b4;
 }
 
+.status-active{
+    color:#20d6b4;
+}
+
+.status-pending{
+    color:#ffcc66;
+}
+
+.status-blocked{
+    color:#ff6b6b;
+}
+
 /* SECTION */
 
 .section-title{
     margin:28px 0 15px;
     font-size:22px;
+}
+
+/* REFERRAL CARD */
+
+.referral-card{
+    background:linear-gradient(135deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:25px;
+}
+
+.referral-label{
+    color:#8fa4b9;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.referral-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.referral-code{
+    flex:1;
+    background:#071522;
+    border:1px solid #ffffff12;
+    border-radius:10px;
+    padding:12px;
+    color:#20d6b4;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.copy-btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 16px;
+    background:#ffffff10;
+    color:#d8e7f3;
+    cursor:pointer;
+}
+
+.copy-btn:hover{
+    background:#ffffff18;
 }
 
 /* PACKAGES */
@@ -193,6 +264,11 @@ header{
 
 .btn:hover{
     filter:brightness(1.1);
+}
+
+.btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 /* QUICK ACTIONS */
@@ -278,6 +354,27 @@ header{
     font-weight:700;
 }
 
+/* LOADING */
+
+.loading{
+    color:#8fa4b9;
+    text-align:center;
+    padding:25px;
+}
+
+/* ERROR */
+
+#errorBox{
+    display:none;
+    background:#ff6b6b12;
+    border:1px solid #ff6b6b35;
+    color:#ff8b8b;
+    padding:13px;
+    border-radius:11px;
+    margin-bottom:18px;
+    font-size:13px;
+}
+
 /* FOOTER */
 
 footer{
@@ -358,6 +455,15 @@ footer{
         gap:10px;
     }
 
+    .referral-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .copy-btn{
+        width:100%;
+    }
+
     .bottom-nav{
         display:flex;
         position:fixed;
@@ -393,8 +499,6 @@ footer{
 <body>
 
 
-<!-- HEADER -->
-
 <header>
 
     <div class="nav">
@@ -409,8 +513,12 @@ footer{
 
         </div>
 
-        <button class="logout" onclick="logoutUser()">
+        <button
+            class="logout"
+            id="logoutBtn">
+
             Logout
+
         </button>
 
     </div>
@@ -421,22 +529,28 @@ footer{
 <main class="container">
 
 
-<!-- WELCOME -->
+<div id="errorBox"></div>
+
 
 <section class="welcome">
 
     <h1>
-        Welcome back 👋
+        Welcome back,
+        <span id="userName">User</span> 👋
     </h1>
 
     <p>
         Manage your Al Barakah account from your dashboard.
     </p>
 
+    <div
+        class="user-email"
+        id="userEmail">
+        Loading...
+    </div>
+
 </section>
 
-
-<!-- STATS -->
 
 <section class="stats">
 
@@ -502,8 +616,12 @@ footer{
             Account Status
         </div>
 
-        <div class="stat-value">
+        <div
+            class="stat-value status-active"
+            id="accountStatus">
+
             Active
+
         </div>
 
     </div>
@@ -512,7 +630,39 @@ footer{
 </section>
 
 
-<!-- PACKAGES -->
+<h2 class="section-title">
+    My Referral
+</h2>
+
+
+<section class="referral-card">
+
+    <div class="referral-label">
+        Your personal referral code
+    </div>
+
+    <div class="referral-row">
+
+        <div
+            class="referral-code"
+            id="referralCode">
+
+            Loading...
+
+        </div>
+
+        <button
+            class="copy-btn"
+            id="copyReferral">
+
+            Copy
+
+        </button>
+
+    </div>
+
+</section>
+
 
 <h2 class="section-title">
     Available Packages
@@ -533,12 +683,15 @@ footer{
         </div>
 
         <p>
-            Purchase Package
+            Package purchase
         </p>
 
-        <button class="btn"
-                onclick="selectPackage(400)">
+        <button
+            class="btn packageBtn"
+            data-amount="400">
+
             Purchase
+
         </button>
 
     </div>
@@ -555,12 +708,15 @@ footer{
         </div>
 
         <p>
-            Purchase Package
+            Package purchase
         </p>
 
-        <button class="btn"
-                onclick="selectPackage(700)">
+        <button
+            class="btn packageBtn"
+            data-amount="700">
+
             Purchase
+
         </button>
 
     </div>
@@ -577,12 +733,15 @@ footer{
         </div>
 
         <p>
-            Purchase Package
+            Package purchase
         </p>
 
-        <button class="btn"
-                onclick="selectPackage(1500)">
+        <button
+            class="btn packageBtn"
+            data-amount="1500">
+
             Purchase
+
         </button>
 
     </div>
@@ -599,12 +758,15 @@ footer{
         </div>
 
         <p>
-            Purchase Package
+            Package purchase
         </p>
 
-        <button class="btn"
-                onclick="selectPackage(3000)">
+        <button
+            class="btn packageBtn"
+            data-amount="3000">
+
             Purchase
+
         </button>
 
     </div>
@@ -612,8 +774,6 @@ footer{
 
 </section>
 
-
-<!-- QUICK ACTIONS -->
 
 <h2 class="section-title">
     Quick Actions
@@ -637,9 +797,12 @@ footer{
             Submit a deposit request.
         </p>
 
-        <button class="btn"
-                onclick="location.href='deposit.html'">
+        <button
+            class="btn"
+            onclick="location.href='deposit.html'">
+
             Deposit
+
         </button>
 
     </div>
@@ -659,9 +822,12 @@ footer{
             Manage your withdrawal request.
         </p>
 
-        <button class="btn"
-                onclick="location.href='withdraw.html'">
+        <button
+            class="btn"
+            onclick="location.href='withdraw.html'">
+
             Withdraw
+
         </button>
 
     </div>
@@ -681,9 +847,12 @@ footer{
             View your referral information.
         </p>
 
-        <button class="btn"
-                onclick="location.href='referral.html'">
+        <button
+            class="btn"
+            onclick="location.href='referral.html'">
+
             View Team
+
         </button>
 
     </div>
@@ -703,9 +872,12 @@ footer{
             View your package orders.
         </p>
 
-        <button class="btn"
-                onclick="location.href='orders.html'">
+        <button
+            class="btn"
+            onclick="location.href='orders.html'">
+
             My Orders
+
         </button>
 
     </div>
@@ -714,52 +886,24 @@ footer{
 </section>
 
 
-<!-- RECENT ACTIVITY -->
-
 <h2 class="section-title">
     Recent Activity
 </h2>
 
 
-<section class="transaction-box">
+<section
+    class="transaction-box"
+    id="activityBox">
 
-
-    <div class="transaction">
-
-        <div class="transaction-left">
-
-            <div class="transaction-icon">
-                🛒
-            </div>
-
-            <div>
-
-                <div class="transaction-name">
-                    No recent orders
-                </div>
-
-                <div class="transaction-date">
-                    Your activity will appear here
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="transaction-amount">
-            —
-        </div>
-
+    <div class="loading">
+        Loading activity...
     </div>
-
 
 </section>
 
 
 </main>
 
-
-<!-- MOBILE NAV -->
 
 <nav class="bottom-nav">
 
@@ -787,39 +931,906 @@ footer{
 
 
 <footer>
-
     © 2026 Al Barakah
-
 </footer>
 
 
-<script>
+<script type="module">
 
-function selectPackage(amount){
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-    alert(
-        "Selected package: Rs. " +
-        amount.toLocaleString()
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+    getDatabase,
+    ref,
+    get
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyB2MHb9flfcWipUxDM6hF3Hgvy9ZsBHV0g",
+
+    authDomain:
+    "referpro-65d27.firebaseapp.com",
+
+    databaseURL:
+    "https://referpro-65d27-default-rtdb.firebaseio.com",
+
+    projectId:
+    "referpro-65d27",
+
+    storageBucket:
+    "referpro-65d27.firebasestorage.app",
+
+    messagingSenderId:
+    "257409426857",
+
+    appId:
+    "1:257409426857:web:8cfcdf79eab219d6f890b8"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const userName =
+    document.getElementById(
+        "userName"
     );
 
-}
+const userEmail =
+    document.getElementById(
+        "userEmail"
+    );
 
-function logoutUser(){
+const balance =
+    document.getElementById(
+        "balance"
+    );
 
-    const confirmLogout =
-        confirm("Do you want to logout?");
+const orders =
+    document.getElementById(
+        "orders"
+    );
 
-    if(confirmLogout){
+const referrals =
+    document.getElementById(
+        "referrals"
+    );
 
-        window.location.href =
-            "login.html";
+const accountStatus =
+    document.getElementById(
+        "accountStatus"
+    );
+
+const referralCode =
+    document.getElementById(
+        "referralCode"
+    );
+
+const activityBox =
+    document.getElementById(
+        "activityBox"
+    );
+
+const errorBox =
+    document.getElementById(
+        "errorBox"
+    );
+
+
+/* =========================
+   AUTH CHECK
+========================= */
+
+onAuthStateChanged(
+    auth,
+    async(user)=>{
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        userEmail.innerText =
+            user.email || "";
+
+
+        userName.innerText =
+            user.displayName ||
+            "User";
+
+
+        await loadDashboard(
+            user.uid
+        );
+
+    }
+);
+
+
+/* =========================
+   LOAD DASHBOARD
+========================= */
+
+async function loadDashboard(uid){
+
+    try{
+
+        const userSnapshot =
+            await get(
+                ref(
+                    db,
+                    "users/" + uid
+                )
+            );
+
+
+        if(
+            !userSnapshot.exists()
+        ){
+
+            showError(
+                "Your account profile was not found in the database."
+            );
+
+            return;
+
+        }
+
+
+        const userData =
+            userSnapshot.val() || {};
+
+
+        /*
+         * REAL WALLET VALUE
+         */
+
+        const wallet =
+            Number(
+                userData.wallet || 0
+            );
+
+
+        balance.innerText =
+            formatMoney(wallet);
+
+
+        /*
+         * ACCOUNT STATUS
+         */
+
+        const status =
+            userData.status ||
+            "active";
+
+
+        accountStatus.innerText =
+            capitalize(status);
+
+
+        accountStatus.className =
+            "stat-value " +
+            getStatusClass(status);
+
+
+        /*
+         * REFERRAL CODE
+         */
+
+        referralCode.innerText =
+            userData.referralCode ||
+            "Not available";
+
+
+        /*
+         * LOAD ALL USERS FOR REFERRAL COUNT
+         */
+
+        const usersSnapshot =
+            await get(
+                ref(
+                    db,
+                    "users"
+                )
+            );
+
+
+        let referralCount = 0;
+
+
+        if(
+            usersSnapshot.exists()
+        ){
+
+            const users =
+                usersSnapshot.val();
+
+
+            Object.keys(users)
+            .forEach(uidKey=>{
+
+                if(
+                    users[uidKey] &&
+                    users[uidKey].referredBy ===
+                    uid
+                ){
+
+                    referralCount++;
+
+                }
+
+            });
+
+        }
+
+
+        referrals.innerText =
+            referralCount;
+
+
+        /*
+         * LOAD ORDERS
+         */
+
+        const ordersSnapshot =
+            await get(
+                ref(
+                    db,
+                    "orders"
+                )
+            );
+
+
+        let orderCount = 0;
+
+
+        if(
+            ordersSnapshot.exists()
+        ){
+
+            const allOrders =
+                ordersSnapshot.val();
+
+
+            Object.keys(allOrders)
+            .forEach(orderId=>{
+
+                const order =
+                    allOrders[orderId];
+
+
+                if(
+                    order &&
+                    order.uid === uid
+                ){
+
+                    orderCount++;
+
+                }
+
+            });
+
+        }
+
+
+        orders.innerText =
+            orderCount;
+
+
+        /*
+         * LOAD RECENT ACTIVITY
+         */
+
+        await loadRecentActivity(
+            uid
+        );
+
+    }catch(error){
+
+        console.error(
+            "Dashboard error:",
+            error
+        );
+
+        showError(
+            "Could not load your dashboard data. Please try again."
+        );
 
     }
 
 }
 
-</script>
 
+/* =========================
+   RECENT ACTIVITY
+========================= */
+
+async function loadRecentActivity(uid){
+
+    activityBox.innerHTML =
+        "";
+
+
+    let activities = [];
+
+
+    try{
+
+        /*
+         * Deposits
+         */
+
+        const depositsSnapshot =
+            await get(
+                ref(
+                    db,
+                    "deposits"
+                )
+            );
+
+
+        if(
+            depositsSnapshot.exists()
+        ){
+
+            const deposits =
+                depositsSnapshot.val();
+
+
+            Object.keys(deposits)
+            .forEach(id=>{
+
+                const item =
+                    deposits[id];
+
+
+                if(
+                    item &&
+                    item.uid === uid
+                ){
+
+                    activities.push({
+
+                        type:
+                            "Deposit",
+
+                        icon:
+                            "💳",
+
+                        amount:
+                            Number(
+                                item.amount || 0
+                            ),
+
+                        status:
+                            item.status ||
+                            "pending",
+
+                        date:
+                            item.createdAt ||
+                            item.timestamp ||
+                            0
+
+                    });
+
+                }
+
+            });
+
+        }
+
+
+        /*
+         * Withdrawals
+         */
+
+        const withdrawalsSnapshot =
+            await get(
+                ref(
+                    db,
+                    "withdrawals"
+                )
+            );
+
+
+        if(
+            withdrawalsSnapshot.exists()
+        ){
+
+            const withdrawals =
+                withdrawalsSnapshot.val();
+
+
+            Object.keys(withdrawals)
+            .forEach(id=>{
+
+                const item =
+                    withdrawals[id];
+
+
+                if(
+                    item &&
+                    item.uid === uid
+                ){
+
+                    activities.push({
+
+                        type:
+                            "Withdrawal",
+
+                        icon:
+                            "💸",
+
+                        amount:
+                            Number(
+                                item.amount || 0
+                            ),
+
+                        status:
+                            item.status ||
+                            "pending",
+
+                        date:
+                            item.createdAt ||
+                            item.timestamp ||
+                            0
+
+                    });
+
+                }
+
+            });
+
+        }
+
+
+        /*
+         * Sort newest first.
+         */
+
+        activities.sort(
+            (a,b)=>
+                Number(b.date || 0) -
+                Number(a.date || 0)
+        );
+
+
+        /*
+         * Show latest five.
+         */
+
+        activities =
+            activities.slice(
+                0,
+                5
+            );
+
+
+        if(
+            activities.length === 0
+        ){
+
+            activityBox.innerHTML = `
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="transaction-icon">
+                            📝
+                        </div>
+
+                        <div>
+
+                            <div class="transaction-name">
+                                No recent activity
+                            </div>
+
+                            <div class="transaction-date">
+                                Your transactions will appear here.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="transaction-amount">
+                        —
+                    </div>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        activities.forEach(item=>{
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "transaction";
+
+
+            const formattedDate =
+                item.date
+                ? new Date(
+                    Number(item.date)
+                  ).toLocaleString()
+                : "Date unavailable";
+
+
+            row.innerHTML = `
+
+                <div class="transaction-left">
+
+                    <div class="transaction-icon">
+                        ${item.icon}
+                    </div>
+
+                    <div>
+
+                        <div class="transaction-name">
+                            ${escapeHtml(item.type)}
+                        </div>
+
+                        <div class="transaction-date">
+                            ${escapeHtml(formattedDate)}
+                            ·
+                            ${escapeHtml(
+                                capitalize(item.status)
+                            )}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="transaction-amount">
+                    Rs. ${formatMoney(item.amount)}
+                </div>
+
+            `;
+
+
+            activityBox.appendChild(
+                row
+            );
+
+        });
+
+
+    }catch(error){
+
+        console.error(
+            "Activity error:",
+            error
+        );
+
+
+        activityBox.innerHTML = `
+
+            <div class="transaction">
+
+                <div class="transaction-left">
+
+                    <div class="transaction-icon">
+                        ⚠️
+                    </div>
+
+                    <div>
+
+                        <div class="transaction-name">
+                            Activity unavailable
+                        </div>
+
+                        <div class="transaction-date">
+                            Please try again later.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   PACKAGE BUTTONS
+========================= */
+
+document
+.querySelectorAll(".packageBtn")
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            const amount =
+                Number(
+                    button.dataset.amount
+                );
+
+
+            if(
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ){
+
+                return;
+
+            }
+
+
+            /*
+             * Send selected package
+             * to the real deposit page.
+             */
+
+            window.location.href =
+                "deposit.html?package=" +
+                encodeURIComponent(
+                    amount
+                );
+
+        }
+    );
+
+});
+
+
+/* =========================
+   COPY REFERRAL
+========================= */
+
+document
+.getElementById("copyReferral")
+.addEventListener(
+    "click",
+    async()=>{
+
+        const code =
+            referralCode.innerText.trim();
+
+
+        if(
+            !code ||
+            code === "Loading..." ||
+            code === "Not available"
+        ){
+
+            return;
+
+        }
+
+
+        try{
+
+            await navigator.clipboard.writeText(
+                code
+            );
+
+
+            const button =
+                document.getElementById(
+                    "copyReferral"
+                );
+
+
+            button.innerText =
+                "Copied!";
+
+
+            setTimeout(()=>{
+
+                button.innerText =
+                    "Copy";
+
+            },1500);
+
+
+        }catch(error){
+
+            alert(
+                "Could not copy the referral code."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+    "click",
+    async()=>{
+
+        try{
+
+            await signOut(
+                auth
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+            showError(
+                "Logout failed. Please try again."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatMoney(value){
+
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "en-PK"
+    );
+
+}
+
+
+function capitalize(value){
+
+    if(!value){
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .charAt(0)
+        .toUpperCase() +
+        String(value)
+        .slice(1);
+
+}
+
+
+function getStatusClass(status){
+
+    const value =
+        String(status)
+        .toLowerCase();
+
+
+    if(
+        value === "blocked" ||
+        value === "suspended"
+    ){
+
+        return "status-blocked";
+
+    }
+
+
+    if(
+        value === "pending"
+    ){
+
+        return "status-pending";
+
+    }
+
+
+    return "status-active";
+
+}
+
+
+function showError(text){
+
+    errorBox.innerText =
+        text;
+
+    errorBox.style.display =
+        "block";
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
 
 </body>
 </html>
