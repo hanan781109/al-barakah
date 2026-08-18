@@ -1,0 +1,775 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Al Barakah - Referral</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%,#14517a35,transparent 35%),
+        radial-gradient(circle at 85% 80%,#087d7430,transparent 35%),
+        #07111f;
+    color:#fff;
+}
+
+header{
+    background:#081522ee;
+    border-bottom:1px solid #ffffff12;
+    padding:14px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(12px);
+}
+
+.nav{
+    max-width:1050px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:19px;
+    font-weight:800;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#08a88e,#19d6b5);
+    font-size:21px;
+}
+
+.back{
+    color:#9fb2c6;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:#20d6b4;
+}
+
+.container{
+    max-width:700px;
+    margin:35px auto;
+    padding:0 16px 50px;
+}
+
+.card{
+    background:linear-gradient(145deg,#10263c,#0b1726);
+    border:1px solid #ffffff12;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 20px 55px #0008;
+    margin-bottom:20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.title h1{
+    margin:0 0 8px;
+    font-size:28px;
+}
+
+.title p{
+    margin:0;
+    color:#8fa4b9;
+    font-size:13px;
+}
+
+.code-box{
+    text-align:center;
+    padding:25px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#0b473f,#0c2638);
+    border:1px solid #20d6b425;
+}
+
+.label{
+    color:#8fa4b9;
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.ref-code{
+    color:#20d6b4;
+    font-size:30px;
+    font-weight:800;
+    letter-spacing:3px;
+    margin-bottom:18px;
+}
+
+.copy-btn{
+    padding:11px 18px;
+    border:1px solid #20d6b440;
+    border-radius:9px;
+    background:#ffffff08;
+    color:#20d6b4;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.copy-btn:hover{
+    background:#20d6b415;
+}
+
+.link-box{
+    margin-top:20px;
+}
+
+.link-input{
+    width:100%;
+    padding:13px;
+    border-radius:11px;
+    border:1px solid #ffffff15;
+    outline:none;
+    background:#071522;
+    color:#c7d6e4;
+    font-size:13px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.stat{
+    background:#ffffff06;
+    border:1px solid #ffffff0c;
+    border-radius:16px;
+    padding:22px;
+    text-align:center;
+}
+
+.stat-number{
+    color:#20d6b4;
+    font-size:30px;
+    font-weight:800;
+    margin-top:8px;
+}
+
+.stat-label{
+    color:#8fa4b9;
+    font-size:12px;
+}
+
+#message{
+    text-align:center;
+    min-height:20px;
+    margin-top:15px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.footer{
+    text-align:center;
+    color:#5f7488;
+    font-size:11px;
+    padding:10px 20px 30px;
+}
+
+@media(max-width:520px){
+
+    .container{
+        margin:20px auto;
+    }
+
+    .card{
+        padding:20px 16px;
+    }
+
+    .ref-code{
+        font-size:24px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🕌
+            </div>
+
+            AL BARAKAH
+
+        </div>
+
+        <a
+            href="dashboard.html"
+            class="back">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="card">
+
+    <div class="title">
+
+        <h1>
+            Referral
+        </h1>
+
+        <p>
+            Invite members using your personal referral code
+        </p>
+
+    </div>
+
+
+    <div class="code-box">
+
+        <div class="label">
+            YOUR REFERRAL CODE
+        </div>
+
+        <div
+            class="ref-code"
+            id="refCode">
+
+            Loading...
+
+        </div>
+
+        <button
+            class="copy-btn"
+            onclick="copyCode()">
+
+            Copy Code
+
+        </button>
+
+
+        <div class="link-box">
+
+            <div class="label">
+                YOUR REFERRAL LINK
+            </div>
+
+            <input
+                type="text"
+                class="link-input"
+                id="refLink"
+                readonly>
+
+            <button
+                class="copy-btn"
+                onclick="copyLink()">
+
+                Copy Link
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <div class="title">
+
+        <h1>
+            My Team
+        </h1>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                TOTAL REFERRALS
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalReferrals">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                ACTIVE MEMBERS
+            </div>
+
+            <div
+                class="stat-number"
+                id="activeMembers">
+
+                0
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="message"></div>
+
+</div>
+
+
+</main>
+
+
+<div class="footer">
+
+    © 2026 Al Barakah
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    update
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "YOUR_FIREBASE_API_KEY",
+
+    authDomain:
+    "YOUR_PROJECT.firebaseapp.com",
+
+    databaseURL:
+    "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+
+    projectId:
+    "YOUR_PROJECT",
+
+    storageBucket:
+    "YOUR_PROJECT.firebasestorage.app",
+
+    messagingSenderId:
+    "YOUR_SENDER_ID",
+
+    appId:
+    "YOUR_APP_ID"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getDatabase(app);
+
+
+let currentUser = null;
+
+
+/* =========================
+   GENERATE UNIQUE CODE
+========================= */
+
+function generateReferralCode(){
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let code = "ABK";
+
+    for(let i=0;i<6;i++){
+
+        code +=
+            chars.charAt(
+                Math.floor(
+                    Math.random()*chars.length
+                )
+            );
+
+    }
+
+    return code;
+
+}
+
+
+/* =========================
+   LOAD USER
+========================= */
+
+onAuthStateChanged(auth,async(user)=>{
+
+    if(!user){
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+    currentUser = user;
+
+    await loadReferralData();
+
+});
+
+
+/* =========================
+   REFERRAL DATA
+========================= */
+
+async function loadReferralData(){
+
+    try{
+
+        const userRef =
+            ref(
+                db,
+                "users/" + currentUser.uid
+            );
+
+
+        const snapshot =
+            await get(userRef);
+
+
+        let userData =
+            snapshot.val() || {};
+
+
+        let referralCode =
+            userData.referralCode;
+
+
+        /*
+         * If this account doesn't have a code,
+         * create one and save it to Firebase.
+         */
+
+        if(!referralCode){
+
+            referralCode =
+                generateReferralCode();
+
+
+            await update(
+                userRef,
+                {
+                    referralCode:
+                        referralCode
+                }
+            );
+
+        }
+
+
+        document
+        .getElementById("refCode")
+        .innerText =
+            referralCode;
+
+
+        const baseUrl =
+            window.location.origin +
+            window.location.pathname
+            .replace(
+                "referral.html",
+                ""
+            );
+
+
+        const link =
+            baseUrl +
+            "register.html?ref=" +
+            encodeURIComponent(
+                referralCode
+            );
+
+
+        document
+        .getElementById("refLink")
+        .value =
+            link;
+
+
+        await loadTeam(referralCode);
+
+
+    }catch(error){
+
+        console.error(error);
+
+        document
+        .getElementById("message")
+        .style.color =
+            "#ff6b6b";
+
+        document
+        .getElementById("message")
+        .innerText =
+            "Could not load referral data.";
+
+    }
+
+}
+
+
+/* =========================
+   LOAD TEAM
+========================= */
+
+async function loadTeam(myCode){
+
+    try{
+
+        const usersSnapshot =
+            await get(
+                ref(db,"users")
+            );
+
+
+        if(!usersSnapshot.exists()){
+
+            return;
+
+        }
+
+
+        const users =
+            usersSnapshot.val();
+
+
+        let total = 0;
+        let active = 0;
+
+
+        for(
+            const uid in users
+        ){
+
+            const member =
+                users[uid];
+
+
+            if(
+                member.referredBy ===
+                myCode
+            ){
+
+                total++;
+
+
+                if(
+                    member.status ===
+                    "active"
+                    ||
+                    member.status ===
+                    "Active"
+                ){
+
+                    active++;
+
+                }
+
+            }
+
+        }
+
+
+        document
+        .getElementById("totalReferrals")
+        .innerText =
+            total;
+
+
+        document
+        .getElementById("activeMembers")
+        .innerText =
+            active;
+
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =========================
+   COPY CODE
+========================= */
+
+window.copyCode =
+async function(){
+
+    const code =
+        document
+        .getElementById("refCode")
+        .innerText;
+
+
+    if(!code ||
+       code === "Loading..."){
+
+        return;
+
+    }
+
+
+    await navigator
+        .clipboard
+        .writeText(code);
+
+
+    showMessage(
+        "Referral code copied."
+    );
+
+};
+
+
+/* =========================
+   COPY LINK
+========================= */
+
+window.copyLink =
+async function(){
+
+    const link =
+        document
+        .getElementById("refLink")
+        .value;
+
+
+    if(!link){
+
+        return;
+
+    }
+
+
+    await navigator
+        .clipboard
+        .writeText(link);
+
+
+    showMessage(
+        "Referral link copied."
+    );
+
+};
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(text){
+
+    const message =
+        document
+        .getElementById("message");
+
+
+    message.style.color =
+        "#20d6b4";
+
+    message.innerText =
+        text;
+
+
+    setTimeout(()=>{
+
+        message.innerText = "";
+
+    },2000);
+
+}
+
+</script>
+
+
+</body>
+</html>
+```
