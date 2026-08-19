@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -247,9 +246,7 @@ input:focus{
 
 <body>
 
-
 <div class="wrapper">
-
 
     <div class="logo">
 
@@ -280,7 +277,6 @@ input:focus{
 
 
         <form id="registerForm">
-
 
             <div class="field">
 
@@ -324,6 +320,7 @@ input:focus{
                     type="tel"
                     id="phone"
                     placeholder="03XXXXXXXXX"
+                    maxlength="11"
                     autocomplete="tel"
                     required>
 
@@ -390,8 +387,6 @@ input:focus{
             </div>
 
 
-            <!-- REFERRAL -->
-
             <div
                 class="ref-box"
                 id="refBox"
@@ -434,7 +429,6 @@ input:focus{
 
             <div id="message"></div>
 
-
         </form>
 
 
@@ -455,7 +449,6 @@ input:focus{
         © 2026 Al Barakah
     </div>
 
-
 </div>
 
 
@@ -464,55 +457,60 @@ input:focus{
 import {
     initializeApp
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
     getAuth,
     createUserWithEmailAndPassword,
     updateProfile
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 import {
     getDatabase,
     ref,
-    get,
-    set
+    set,
+    get
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
 /* =========================
-   FIREBASE CONFIG
+   AL BARAKAH FIREBASE
 ========================= */
 
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyB2MHb9flfcWipUxDM6hF3Hgvy9ZsBHV0g",
+        "AIzaSyCCFvbttq5fFFXMVdkVM4ddolUFoGTDV0k",
 
     authDomain:
-    "referpro-65d27.firebaseapp.com",
+        "al-barakah-d5e8a.firebaseapp.com",
 
     databaseURL:
-    "https://referpro-65d27-default-rtdb.firebaseio.com",
+        "https://al-barakah-d5e8a-default-rtdb.firebaseio.com",
 
     projectId:
-    "referpro-65d27",
+        "al-barakah-d5e8a",
 
     storageBucket:
-    "referpro-65d27.firebasestorage.app",
+        "al-barakah-d5e8a.firebasestorage.app",
 
     messagingSenderId:
-    "257409426857",
+        "132271131466",
 
     appId:
-    "1:257409426857:web:8cfcdf79eab219d6f890b8"
+        "1:132271131466:web:d5819ed98b681d14238fb3",
+
+    measurementId:
+        "G-95Y27E3DWM"
 
 };
 
+
+/* =========================
+   INITIALIZE
+========================= */
 
 const app =
     initializeApp(firebaseConfig);
@@ -546,13 +544,14 @@ const registerBtn =
 
 /* =========================
    REFERRAL FROM URL
+   Example:
+   register.html?ref=ABK123456
 ========================= */
 
 const params =
     new URLSearchParams(
         window.location.search
     );
-
 
 const incomingReferral =
     (params.get("ref") || "")
@@ -562,21 +561,21 @@ const incomingReferral =
 
 if(incomingReferral){
 
-    document
-    .getElementById("refCode")
-    .innerText =
+    document.getElementById(
+        "refCode"
+    ).innerText =
         incomingReferral;
 
-    document
-    .getElementById("refBox")
-    .style.display =
+    document.getElementById(
+        "refBox"
+    ).style.display =
         "block";
 
 }
 
 
 /* =========================
-   UNIQUE REFERRAL CODE
+   GENERATE REFERRAL CODE
 ========================= */
 
 function generateReferralCode(){
@@ -587,11 +586,7 @@ function generateReferralCode(){
     let code =
         "ABK";
 
-    for(
-        let i = 0;
-        i < 6;
-        i++
-    ){
+    for(let i = 0; i < 6; i++){
 
         code +=
             chars[
@@ -609,69 +604,39 @@ function generateReferralCode(){
 
 
 /* =========================
-   CHECK CODE EXISTS
-========================= */
-
-async function codeExists(code){
-
-    const snapshot =
-        await get(
-            ref(
-                db,
-                "users"
-            )
-        );
-
-
-    if(!snapshot.exists()){
-
-        return false;
-
-    }
-
-
-    const users =
-        snapshot.val();
-
-
-    for(
-        const uid in users
-    ){
-
-        if(
-            users[uid].referralCode ===
-            code
-        ){
-
-            return true;
-
-        }
-
-    }
-
-
-    return false;
-
-}
-
-
-/* =========================
-   CREATE UNIQUE CODE
+   FIND UNIQUE CODE
 ========================= */
 
 async function createUniqueCode(){
 
+    const usersRef =
+        ref(db,"users");
+
+    const snapshot =
+        await get(usersRef);
+
+    const users =
+        snapshot.exists()
+            ? snapshot.val()
+            : {};
+
     let code;
+    let exists;
 
     do{
 
         code =
             generateReferralCode();
 
-    }while(
-        await codeExists(code)
-    );
+        exists =
+            Object.values(users)
+            .some(
+                user =>
+                    user &&
+                    user.referralCode === code
+            );
 
+    }while(exists);
 
     return code;
 
@@ -682,42 +647,29 @@ async function createUniqueCode(){
    CHECK REFERRAL
 ========================= */
 
-async function validateReferral(code){
+async function findReferrer(code){
 
     if(!code){
-
         return null;
-
     }
-
 
     const snapshot =
         await get(
-            ref(
-                db,
-                "users"
-            )
+            ref(db,"users")
         );
 
-
     if(!snapshot.exists()){
-
         return null;
-
     }
-
 
     const users =
         snapshot.val();
 
-
-    for(
-        const uid in users
-    ){
+    for(const uid in users){
 
         if(
-            users[uid].referralCode ===
-            code
+            users[uid] &&
+            users[uid].referralCode === code
         ){
 
             return uid;
@@ -725,7 +677,6 @@ async function validateReferral(code){
         }
 
     }
-
 
     return null;
 
@@ -738,17 +689,15 @@ async function validateReferral(code){
 
 form.addEventListener(
     "submit",
-    async(e)=>{
+    async(event)=>{
 
-        e.preventDefault();
-
+        event.preventDefault();
 
         const name =
             document
             .getElementById("name")
             .value
             .trim();
-
 
         const email =
             document
@@ -757,19 +706,16 @@ form.addEventListener(
             .trim()
             .toLowerCase();
 
-
         const phone =
             document
             .getElementById("phone")
             .value
             .trim();
 
-
         const password =
             document
             .getElementById("password")
             .value;
-
 
         const confirmPassword =
             document
@@ -777,14 +723,13 @@ form.addEventListener(
             .value;
 
 
-        if(
-            password !==
-            confirmPassword
-        ){
+        /* PASSWORD */
+
+        if(password !== confirmPassword){
 
             showMessage(
                 "Passwords do not match.",
-                "error"
+                true
             );
 
             return;
@@ -792,13 +737,11 @@ form.addEventListener(
         }
 
 
-        if(
-            password.length < 6
-        ){
+        if(password.length < 6){
 
             showMessage(
                 "Password must be at least 6 characters.",
-                "error"
+                true
             );
 
             return;
@@ -806,15 +749,13 @@ form.addEventListener(
         }
 
 
-        if(
-            !name ||
-            !email ||
-            !phone
-        ){
+        /* PHONE */
+
+        if(!/^03[0-9]{9}$/.test(phone)){
 
             showMessage(
-                "Please fill all fields.",
-                "error"
+                "Enter a valid phone number, e.g. 03XXXXXXXXX.",
+                true
             );
 
             return;
@@ -831,28 +772,9 @@ form.addEventListener(
 
         try{
 
-
             /*
-             * Check whether the supplied
-             * referral code belongs to
-             * an existing user.
-             */
-
-            let referredBy = null;
-
-
-            if(incomingReferral){
-
-                referredBy =
-                    await validateReferral(
-                        incomingReferral
-                    );
-
-            }
-
-
-            /*
-             * Create Firebase Auth account.
+             * Create Firebase Authentication
+             * account first.
              */
 
             const credential =
@@ -862,13 +784,12 @@ form.addEventListener(
                     password
                 );
 
-
             const user =
                 credential.user;
 
 
             /*
-             * Set Firebase Auth display name.
+             * Save display name.
              */
 
             await updateProfile(
@@ -881,16 +802,43 @@ form.addEventListener(
 
 
             /*
-             * Generate personal referral code.
+             * Create personal referral code.
              */
 
             const myReferralCode =
-                await createUniqueCode();
+                generateReferralCode();
 
 
             /*
-             * Save user information
-             * inside Realtime Database.
+             * If a referral code was supplied,
+             * try to find its owner.
+             */
+
+            let referredBy = null;
+
+            if(incomingReferral){
+
+                try{
+
+                    referredBy =
+                        await findReferrer(
+                            incomingReferral
+                        );
+
+                }catch(refError){
+
+                    console.warn(
+                        "Referral lookup skipped:",
+                        refError
+                    );
+
+                }
+
+            }
+
+
+            /*
+             * Save user profile.
              */
 
             await set(
@@ -918,11 +866,11 @@ form.addEventListener(
                     referredBy:
                         referredBy,
 
-                    status:
-                        "active",
-
                     wallet:
                         0,
+
+                    status:
+                        "active",
 
                     createdAt:
                         Date.now()
@@ -933,17 +881,13 @@ form.addEventListener(
 
             showMessage(
                 "Account created successfully.",
-                "success"
+                false
             );
 
 
             registerBtn.innerText =
-                "Account Created";
+                "Account Created ✓";
 
-
-            /*
-             * Open dashboard.
-             */
 
             setTimeout(()=>{
 
@@ -955,63 +899,71 @@ form.addEventListener(
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "Registration error:",
+                error
+            );
 
 
-            let text =
-                "Registration failed.";
+            let errorText =
+                "Registration failed. Please try again.";
 
 
-            if(
-                error.code ===
-                "auth/email-already-in-use"
-            ){
+            switch(error.code){
 
-                text =
-                    "This email is already registered.";
+                case "auth/email-already-in-use":
 
-            }
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
+                    errorText =
+                        "This email is already registered.";
 
-                text =
-                    "Please enter a valid email.";
+                    break;
 
-            }
-            else if(
-                error.code ===
-                "auth/weak-password"
-            ){
 
-                text =
-                    "Password is too weak.";
+                case "auth/invalid-email":
 
-            }
-            else if(
-                error.code ===
-                "auth/network-request-failed"
-            ){
+                    errorText =
+                        "Please enter a valid email address.";
 
-                text =
-                    "Network error. Please try again.";
+                    break;
 
-            }
-            else if(
-                error.code ===
-                "PERMISSION_DENIED"
-            ){
 
-                text =
-                    "Firebase database permission denied.";
+                case "auth/weak-password":
+
+                    errorText =
+                        "Password must be at least 6 characters.";
+
+                    break;
+
+
+                case "auth/network-request-failed":
+
+                    errorText =
+                        "Network error. Check your internet connection.";
+
+                    break;
+
+
+                case "auth/operation-not-allowed":
+
+                    errorText =
+                        "Email/Password login is not enabled in Firebase.";
+
+                    break;
+
+
+                case "PERMISSION_DENIED":
+
+                    errorText =
+                        "Database permission denied. Check Firebase Rules.";
+
+                    break;
 
             }
 
 
             showMessage(
-                text,
-                "error"
+                errorText,
+                true
             );
 
 
@@ -1028,22 +980,17 @@ form.addEventListener(
 
 
 /* =========================
-   PASSWORD TOGGLE
+   PASSWORD SHOW/HIDE
 ========================= */
 
 window.togglePassword =
 function(id,button){
 
     const input =
-        document.getElementById(
-            id
-        );
+        document.getElementById(id);
 
 
-    if(
-        input.type ===
-        "password"
-    ){
+    if(input.type === "password"){
 
         input.type =
             "text";
@@ -1070,23 +1017,20 @@ function(id,button){
 
 function showMessage(
     text,
-    type
+    isError
 ){
 
     message.innerText =
         text;
 
-
     message.style.color =
-        type === "error"
-        ? "#ff6b6b"
-        : "#20d6b4";
+        isError
+            ? "#ff6b6b"
+            : "#20d6b4";
 
 }
 
 </script>
 
-
 </body>
 </html>
-```
