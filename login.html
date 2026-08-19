@@ -2,17 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Al Barakah - Login</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
@@ -223,7 +219,6 @@ input:focus{
 }
 
 @media(max-width:480px){
-
     body{
         padding:18px 12px;
     }
@@ -236,49 +231,31 @@ input:focus{
     .logo h1{
         font-size:23px;
     }
-
 }
-
 </style>
-
 </head>
 
 <body>
 
-
 <div class="wrapper">
 
-
     <div class="logo">
+        <div class="logo-icon">🕌</div>
 
-        <div class="logo-icon">
-            🕌
-        </div>
+        <h1>AL BARAKAH</h1>
 
-        <h1>
-            AL BARAKAH
-        </h1>
-
-        <p>
-            Welcome back
-        </p>
-
+        <p>Welcome back</p>
     </div>
-
 
     <div class="card">
 
-        <h2>
-            Login
-        </h2>
+        <h2>Login</h2>
 
         <div class="subtitle">
             Sign in to your account
         </div>
 
-
         <form id="loginForm">
-
 
             <div class="field">
 
@@ -294,7 +271,6 @@ input:focus{
                     required>
 
             </div>
-
 
             <div class="field">
 
@@ -314,7 +290,7 @@ input:focus{
                     <button
                         type="button"
                         class="show-password"
-                        onclick="togglePassword()">
+                        id="showPasswordBtn">
 
                         Show
 
@@ -323,7 +299,6 @@ input:focus{
                 </div>
 
             </div>
-
 
             <div class="options">
 
@@ -337,18 +312,16 @@ input:focus{
 
                 </label>
 
-
                 <a
                     href="#"
                     class="forgot"
-                    onclick="forgotPassword(event)">
+                    id="forgotBtn">
 
                     Forgot Password?
 
                 </a>
 
             </div>
-
 
             <button
                 type="submit"
@@ -359,12 +332,9 @@ input:focus{
 
             </button>
 
-
             <div id="message"></div>
 
-
         </form>
-
 
         <div class="register">
 
@@ -378,11 +348,9 @@ input:focus{
 
     </div>
 
-
     <div class="footer">
         © 2026 Al Barakah
     </div>
-
 
 </div>
 
@@ -391,9 +359,7 @@ input:focus{
 
 import {
     initializeApp
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
     getAuth,
@@ -402,39 +368,41 @@ import {
     setPersistence,
     browserLocalPersistence,
     browserSessionPersistence
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 /* =========================
-   FIREBASE CONFIG
+   YOUR FIREBASE PROJECT
 ========================= */
 
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyB2MHb9flfcWipUxDM6hF3Hgvy9ZsBHV0g",
+        "AIzaSyB2MHb9fcWipUxDM6hF3Hgvy9ZsBHV0g",
 
     authDomain:
-    "referpro-65d27.firebaseapp.com",
+        "referpro-65d27.firebaseapp.com",
 
     databaseURL:
-    "https://referpro-65d27-default-rtdb.firebaseio.com",
+        "https://referpro-65d27-default-rtdb.firebaseio.com",
 
     projectId:
-    "referpro-65d27",
+        "referpro-65d27",
 
     storageBucket:
-    "referpro-65d27.firebasestorage.app",
+        "referpro-65d27.firebasestorage.app",
 
     messagingSenderId:
-    "257409426857",
+        "257409426857",
 
     appId:
-    "1:257409426857:web:8cfcdf79eab219d6f890b8"
-
+        "1:257409426857:web:8cfcdf79eab219d6f890b8"
 };
 
+
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
 
 const app =
     initializeApp(firebaseConfig);
@@ -442,6 +410,10 @@ const app =
 const auth =
     getAuth(app);
 
+
+/* =========================
+   ADMIN EMAIL
+========================= */
 
 const ADMIN_EMAIL =
     "hanandanger7810@gmail.com";
@@ -452,19 +424,61 @@ const ADMIN_EMAIL =
 ========================= */
 
 const form =
-    document.getElementById(
-        "loginForm"
-    );
+    document.getElementById("loginForm");
 
 const message =
-    document.getElementById(
-        "message"
-    );
+    document.getElementById("message");
 
 const loginBtn =
-    document.getElementById(
-        "loginBtn"
-    );
+    document.getElementById("loginBtn");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const rememberInput =
+    document.getElementById("remember");
+
+const showPasswordBtn =
+    document.getElementById("showPasswordBtn");
+
+const forgotBtn =
+    document.getElementById("forgotBtn");
+
+
+/* =========================
+   SHOW / HIDE PASSWORD
+========================= */
+
+showPasswordBtn.addEventListener(
+    "click",
+    ()=>{
+
+        if(
+            passwordInput.type ===
+            "password"
+        ){
+
+            passwordInput.type =
+                "text";
+
+            showPasswordBtn.innerText =
+                "Hide";
+
+        }else{
+
+            passwordInput.type =
+                "password";
+
+            showPasswordBtn.innerText =
+                "Show";
+
+        }
+
+    }
+);
 
 
 /* =========================
@@ -473,35 +487,23 @@ const loginBtn =
 
 form.addEventListener(
     "submit",
-    async(e)=>{
+    async(event)=>{
 
-        e.preventDefault();
-
+        event.preventDefault();
 
         const email =
-            document
-            .getElementById("email")
-            .value
+            emailInput.value
             .trim()
             .toLowerCase();
 
-
         const password =
-            document
-            .getElementById("password")
-            .value;
-
+            passwordInput.value;
 
         const remember =
-            document
-            .getElementById("remember")
-            .checked;
+            rememberInput.checked;
 
 
-        if(
-            !email ||
-            !password
-        ){
+        if(!email || !password){
 
             showMessage(
                 "Please enter your email and password.",
@@ -509,7 +511,6 @@ form.addEventListener(
             );
 
             return;
-
         }
 
 
@@ -522,24 +523,15 @@ form.addEventListener(
 
         try{
 
-            /*
-             * Keep user logged in when
-             * Remember me is checked.
-             */
-
             await setPersistence(
                 auth,
                 remember
-                ? browserLocalPersistence
-                : browserSessionPersistence
+                    ? browserLocalPersistence
+                    : browserSessionPersistence
             );
 
 
-            /*
-             * Firebase Authentication
-             */
-
-            const credential =
+            const result =
                 await signInWithEmailAndPassword(
                     auth,
                     email,
@@ -548,26 +540,23 @@ form.addEventListener(
 
 
             const user =
-                credential.user;
+                result.user;
 
 
             showMessage(
-                "Login successful.",
+                "Login successful ✓",
                 "success"
             );
 
-
-            /*
-             * Admin goes to admin panel.
-             * Normal users go to dashboard.
-             */
 
             setTimeout(()=>{
 
                 if(
                     user.email &&
-                    user.email.toLowerCase() ===
-                    ADMIN_EMAIL.toLowerCase()
+                    user.email
+                    .toLowerCase() ===
+                    ADMIN_EMAIL
+                    .toLowerCase()
                 ){
 
                     window.location.href =
@@ -585,65 +574,86 @@ form.addEventListener(
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "Firebase Login Error:",
+                error
+            );
 
 
             let text =
-                "Login failed.";
+                "Login failed. Please try again.";
 
 
-            if(
-                error.code ===
-                "auth/invalid-credential"
-            ){
+            switch(error.code){
 
-                text =
-                    "Invalid email or password.";
+                case
+                "auth/invalid-credential":
 
-            }
-            else if(
-                error.code ===
-                "auth/user-not-found"
-            ){
+                    text =
+                        "Invalid email or password.";
 
-                text =
-                    "No account found with this email.";
+                    break;
 
-            }
-            else if(
-                error.code ===
-                "auth/wrong-password"
-            ){
 
-                text =
-                    "Incorrect password.";
+                case
+                "auth/user-not-found":
 
-            }
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
+                    text =
+                        "No account found with this email.";
 
-                text =
-                    "Please enter a valid email.";
+                    break;
 
-            }
-            else if(
-                error.code ===
-                "auth/too-many-requests"
-            ){
 
-                text =
-                    "Too many attempts. Please try again later.";
+                case
+                "auth/wrong-password":
 
-            }
-            else if(
-                error.code ===
-                "auth/network-request-failed"
-            ){
+                    text =
+                        "Incorrect password.";
 
-                text =
-                    "Network error. Check your internet connection.";
+                    break;
+
+
+                case
+                "auth/invalid-email":
+
+                    text =
+                        "Please enter a valid email.";
+
+                    break;
+
+
+                case
+                "auth/too-many-requests":
+
+                    text =
+                        "Too many attempts. Try again later.";
+
+                    break;
+
+
+                case
+                "auth/network-request-failed":
+
+                    text =
+                        "Network error. Check your internet.";
+
+                    break;
+
+
+                case
+                "auth/user-disabled":
+
+                    text =
+                        "This account has been disabled.";
+
+                    break;
+
+
+                default:
+
+                    text =
+                        error.message ||
+                        "Login failed.";
 
             }
 
@@ -667,128 +677,87 @@ form.addEventListener(
 
 
 /* =========================
-   PASSWORD RESET
+   FORGOT PASSWORD
 ========================= */
 
-window.forgotPassword =
-async function(event){
+forgotBtn.addEventListener(
+    "click",
+    async(event)=>{
 
-    event.preventDefault();
-
-
-    const email =
-        document
-        .getElementById("email")
-        .value
-        .trim()
-        .toLowerCase();
+        event.preventDefault();
 
 
-    if(!email){
-
-        showMessage(
-            "Enter your email first.",
-            "warning"
-        );
-
-        return;
-
-    }
+        const email =
+            emailInput.value
+            .trim()
+            .toLowerCase();
 
 
-    try{
+        if(!email){
 
-        await sendPasswordResetEmail(
-            auth,
-            email
-        );
+            showMessage(
+                "Enter your email first.",
+                "warning"
+            );
 
+            emailInput.focus();
 
-        showMessage(
-            "Password reset email sent.",
-            "success"
-        );
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        let text =
-            "Could not send reset email.";
-
-
-        if(
-            error.code ===
-            "auth/user-not-found"
-        ){
-
-            text =
-                "No account found with this email.";
-
-        }
-        else if(
-            error.code ===
-            "auth/invalid-email"
-        ){
-
-            text =
-                "Please enter a valid email.";
-
+            return;
         }
 
 
-        showMessage(
-            text,
-            "error"
-        );
+        try{
+
+            await sendPasswordResetEmail(
+                auth,
+                email
+            );
+
+
+            showMessage(
+                "Password reset email sent ✓",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            let text =
+                "Could not send reset email.";
+
+
+            if(
+                error.code ===
+                "auth/user-not-found"
+            ){
+
+                text =
+                    "No account found with this email.";
+
+            }
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                text =
+                    "Please enter a valid email.";
+
+            }
+
+
+            showMessage(
+                text,
+                "error"
+            );
+
+        }
 
     }
-
-};
-
-
-/* =========================
-   PASSWORD TOGGLE
-========================= */
-
-window.togglePassword =
-function(){
-
-    const input =
-        document.getElementById(
-            "password"
-        );
-
-    const button =
-        document.querySelector(
-            ".show-password"
-        );
-
-
-    if(
-        input.type ===
-        "password"
-    ){
-
-        input.type =
-            "text";
-
-        button.innerText =
-            "Hide";
-
-    }else{
-
-        input.type =
-            "password";
-
-        button.innerText =
-            "Show";
-
-    }
-
-};
+);
 
 
 /* =========================
@@ -826,7 +795,6 @@ function showMessage(
 }
 
 </script>
-
 
 </body>
 </html>
